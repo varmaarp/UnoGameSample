@@ -17,6 +17,9 @@ import java.util.ArrayList;
 
 public class CardAdapter extends ArrayAdapter<Card> {
 
+    /**
+     * Constructor
+     */
     public CardAdapter(Context context, ArrayList<Card> cards){
         super(context, 0, cards);
     }
@@ -24,16 +27,21 @@ public class CardAdapter extends ArrayAdapter<Card> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
+        // Current card in list
         Card currentCard = getItem(position);
 
+        // Check for existing view being reused, else inflate a new view
         View listViewItem = convertView;
         if (listViewItem == null) {
             listViewItem = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
         }
 
-        TextView cardNumber = (TextView) listViewItem.findViewById(R.id.card_number);
+        // Set textView to show the number of card in list
+        TextView cardNumber = listViewItem.findViewById(R.id.card_number);
         cardNumber.setText(Integer.toString(currentCard.getCardNumber()));
 
+        // Set background to show the color of card in list
         if (currentCard.getCardColor() == Color.BLUE){
             cardNumber.setBackgroundColor(android.graphics.Color.BLUE);
         }
